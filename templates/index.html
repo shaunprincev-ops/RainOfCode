@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FloodWatch AI</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="brand">FloodWatch <span>AI</span></div>
+    <div class="tagline">Evidence-based flood intelligence</div>
+  </div>
+  <div class="status"><i></i> Live analysis</div>
+</header>
+
+<main>
+<section class="hero">
+  <div>
+    <p class="eyebrow">DISASTER MONITORING DASHBOARD</p>
+    <h1>Understand a flood<br><span>from the evidence.</span></h1>
+    <p class="hero-copy">Combine public reports, rainfall data and map information to create a transparent flood assessment.</p>
+  </div>
+
+  <form id="searchForm" class="search-card">
+    <label>Flood-affected location</label>
+    <input id="location" placeholder="e.g. Mangaluru, Karnataka" required>
+    <label>Flood date <small>(required)</small></label>
+    <input id="floodDate" type="date" required>
+    <label>Flood time <small>(optional)</small></label>
+    <input id="floodTime" type="time">
+    <button>Analyze Flood <b>→</b></button>
+    <div class="privacy">Historical event data only. Current/future data is not used to score a past flood.</div>
+  </form>
+</section>
+
+<section id="loading" class="loading hidden">
+  <div class="spinner"></div>
+  <div><strong>Collecting evidence…</strong><br><span>Geocoding, weather, public reports and map data</span></div>
+</section>
+
+<section id="dashboard" class="hidden">
+  <div class="event-banner"><b>Analysis event:</b> <span id="eventInfo">—</span> · <span id="windowInfo">—</span></div>
+
+  <div class="stats">
+    <div class="stat"><span>FLOOD SEVERITY</span><strong id="severity">—</strong><em id="severityScore">—</em></div>
+    <div class="stat"><span>CONFIDENCE</span><strong id="confidence">—</strong><em>Evidence confidence</em></div>
+    <div class="stat"><span>24H RAIN</span><strong id="rain">—</strong><em>Open-Meteo estimate</em></div>
+    <div class="stat"><span>PUBLIC REPORTS</span><strong id="reports">—</strong><em>RSS results</em></div>
+  </div>
+
+  <div class="grid">
+    <section class="panel map-panel">
+      <div class="panel-head"><div><span class="eyebrow">GEOSPATIAL VIEW</span><h2>Flood intelligence map</h2></div></div>
+      <div id="map"></div>
+      <div class="legend">
+        <span><i class="low"></i>Low</span><span><i class="moderate"></i>Moderate</span>
+        <span><i class="high"></i>High</span><span><i class="severe"></i>Severe</span>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><div><span class="eyebrow">AREA ASSESSMENT</span><h2>Affected area</h2></div></div>
+      <div id="areas"></div>
+    </section>
+  </div>
+
+  <div class="grid lower">
+    <section class="panel">
+      <div class="panel-head"><div><span class="eyebrow">BUILDING-LEVEL CHECK</span><h2>Analyze a specific building</h2></div></div>
+      <form id="buildingForm" class="building-form">
+        <input id="building" placeholder="Building name or address">
+        <button>Check building</button>
+      </form>
+      <div id="buildingResult" class="result-box muted">A building will only be marked damaged when location-specific evidence supports that conclusion.</div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><div><span class="eyebrow">AI REPORT</span><h2>Assessment summary</h2></div></div>
+      <div id="report"></div>
+    </section>
+  </div>
+
+  <section class="panel sources">
+    <div class="panel-head"><div><span class="eyebrow">EVIDENCE</span><h2>Public reports</h2></div></div>
+    <div id="news"></div>
+  </section>
+</section>
+
+<section id="error" class="error hidden"></section>
+</main>
+
+<footer>FloodWatch AI · Prototype · Verify critical information with official authorities.</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/static/js/app.js"></script>
+</body>
+</html>
